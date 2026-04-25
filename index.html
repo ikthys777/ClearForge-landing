@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ClearForge LLC builds custom software and digital solutions for small businesses and individuals. Based in North Carolina.">
+    <title>ClearForge LLC — Custom Software & Digital Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0e1a;
+            --bg-elevated: #131826;
+            --text: #e8eaed;
+            --text-muted: #9aa0b4;
+            --accent: #4f7cff;
+            --accent-glow: rgba(79, 124, 255, 0.15);
+            --border: #1f2738;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        header {
+            padding: 2rem 0 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .logo-accent {
+            color: var(--accent);
+        }
+
+        main {
+            flex: 1;
+            padding: 4rem 0;
+        }
+
+        .hero {
+            margin-bottom: 5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .hero h1 .accent {
+            color: var(--accent);
+        }
+
+        .hero .lead {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin-bottom: 2rem;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            background: var(--accent-glow);
+            border: 1px solid rgba(79, 124, 255, 0.3);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .status-pill::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .services {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .service-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+        }
+
+        .service-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .approach-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .approach-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .approach-list li:last-child {
+            border-bottom: none;
+        }
+
+        .approach-list strong {
+            color: var(--text);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .approach-marker {
+            color: var(--accent);
+            font-weight: 700;
+            min-width: 1.5rem;
+        }
+
+        .contact-block {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .contact-block p {
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .contact-email {
+            display: inline-block;
+            font-size: 1.15rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .contact-email:hover {
+            background: var(--accent-glow);
+        }
+
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        @media (min-width: 640px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Clear<span class="logo-accent">Forge</span></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <span class="status-pill">Building in 2026</span>
+                <h1>
+                    Custom software and digital solutions
+                    <span class="accent">built around your problem.</span>
+                </h1>
+                <p class="lead">
+                    ClearForge LLC is a North Carolina software and digital services company. We work with small businesses and individuals to identify operational gaps and build the right tool to close them — from scratch, around the actual problem, with the people who'll use it daily.
+                </p>
+            </section>
+
+            <section>
+                <h2>What we do</h2>
+                <div class="services">
+                    <div class="service-card">
+                        <h3>Custom Software</h3>
+                        <p>Web applications, progressive web apps, and SaaS products built to your specifications.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Digital Infrastructure</h3>
+                        <p>Backend systems, databases, automation, and integrations that scale with your operation.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Multilingual Solutions</h3>
+                        <p>Software designed for multilingual teams from the architectural foundation, not bolted on later.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Domain-Specific Tools</h3>
+                        <p>Industry tools built by people who've worked the floor — software that respects how the work actually happens.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>How we approach a build</h2>
+                <ul class="approach-list">
+                    <li>
+                        <span class="approach-marker">01</span>
+                        <div>
+                            <strong>Identify the real problem</strong>
+                            We start by understanding the operational gap, not the requested feature list. The right tool comes after the right understanding.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-marker">02</span>
+                        <div>
+                            <strong>Build from the ground up</strong>
+                            Custom software for the specific problem, not a configured template. The architecture serves the use case, not the other way around.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-marker">03</span>
+                        <div>
+                            <strong>Onboard with the people who'll use it</strong>
+                            Tools that aren't adopted are tools that fail. We work alongside the people who'll touch the system every day.
+                        </div>
+                    </li>
+                    <li>
+                        <span class="approach-marker">04</span>
+                        <div>
+                            <strong>Iterate based on real use</strong>
+                            What's used reveals what should change. We expand based on data, not assumptions.
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Get in touch</h2>
+                <div class="contact-block">
+                    <p>We're currently selective about new engagements while we focus on early build work. If you have a project in mind, we'd like to hear about it.</p>
+                    <a href="mailto:team@clearforge.dev" class="contact-email">team@clearforge.dev</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>&copy; 2026 ClearForge LLC. All rights reserved.</div>
+                <div>North Carolina, United States</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

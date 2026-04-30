@@ -3,344 +3,1087 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ClearForge LLC builds custom software and digital solutions for small businesses and individuals. Based in North Carolina.">
-    <title>ClearForge LLC — Custom Software & Digital Solutions</title>
+    <meta name="description" content="ClearForge LLC builds custom software and digital solutions for small businesses and individuals. Made by hand in North Carolina.">
+    <meta name="theme-color" content="#3D3A36">
+    <title>ClearForge LLC — Custom software, made by hand.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Manrope:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
-            --bg: #0a0e1a;
-            --bg-elevated: #131826;
-            --text: #e8eaed;
-            --text-muted: #9aa0b4;
-            --accent: #4f7cff;
-            --accent-glow: rgba(79, 124, 255, 0.15);
-            --border: #1f2738;
+            --cream: #F4EFE8;
+            --cream-warm: #EFE8DD;
+            --charcoal: #3D3A36;
+            --charcoal-soft: #4A4641;
+            --terracotta: #C66A4F;
+            --terracotta-deep: #A85539;
+            --terracotta-glow: #E08570;
+            --muted: #6B6660;
+            --muted-on-dark: #A89F95;
+            --line: rgba(61, 58, 54, 0.14);
+            --line-on-dark: rgba(244, 239, 232, 0.12);
+            --shadow-warm: 0 24px 48px -24px rgba(61, 58, 54, 0.18);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            font-size: 17px;
             line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            color: var(--charcoal);
+            background: var(--cream);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* Atmospheric grain — subtle texture across whole page */
+        .grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.5;
+            mix-blend-mode: multiply;
+        }
+
+        /* Hero ember canvas — atmospheric particles in the hero only */
+        .embers {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
-            max-width: 880px;
+            max-width: 1180px;
             margin: 0 auto;
             padding: 0 1.5rem;
+            position: relative;
             width: 100%;
         }
 
+        @media (min-width: 768px) {
+            .container { padding: 0 2.5rem; }
+        }
+
+        /* ========== HEADER ========== */
         header {
-            padding: 2rem 0 1rem;
-            border-bottom: 1px solid var(--border);
+            position: relative;
+            padding: 1.75rem 0 1.5rem;
+            z-index: 10;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+        /* Reserved space for the future logo mark — subtle placeholder */
+        .brand-mark {
+            width: 28px;
+            height: 28px;
+            border: 1.5px solid var(--charcoal);
+            border-radius: 4px;
+            position: relative;
+            flex-shrink: 0;
+            transform: translateY(4px);
+            transition: all 0.4s var(--ease-out);
+            background: var(--cream);
+        }
+
+        .brand-mark::after {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            background: var(--terracotta);
+            border-radius: 1px;
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .brand:hover .brand-mark { transform: translateY(4px) rotate(-8deg); }
+        .brand:hover .brand-mark::after { transform: scale(0.85); }
+
+        .brand-name {
+            font-family: 'Fraunces', serif;
+            font-size: 1.45rem;
+            font-weight: 600;
+            font-variation-settings: "opsz" 144, "SOFT" 30;
             letter-spacing: -0.02em;
-            color: var(--text);
+            color: var(--charcoal);
+            line-height: 1;
         }
 
-        .logo-accent {
-            color: var(--accent);
+        .brand-name .accent {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--terracotta-deep);
         }
 
-        main {
-            flex: 1;
-            padding: 4rem 0;
+        .header-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            color: var(--muted);
+            text-transform: uppercase;
         }
 
+        .header-meta .dot {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background: var(--terracotta);
+            border-radius: 50%;
+            margin: 0 0.45rem;
+            transform: translateY(-2px);
+            animation: emberPulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes emberPulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(198, 106, 79, 0.5); }
+            50% { opacity: 0.55; box-shadow: 0 0 0 4px rgba(198, 106, 79, 0); }
+        }
+
+        /* ========== HERO ========== */
         .hero {
-            margin-bottom: 5rem;
+            position: relative;
+            padding: 3.5rem 0 5rem;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .hero { padding: 5rem 0 7rem; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 920px;
+        }
+
+        .hero-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            color: var(--terracotta-deep);
+            text-transform: uppercase;
+            margin-bottom: 1.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            opacity: 0;
+            animation: fadeUp 0.9s var(--ease-out) 0.1s forwards;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--terracotta);
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.25rem);
-            font-weight: 700;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            color: var(--text);
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(2.3rem, 6vw, 4.6rem);
+            line-height: 1.02;
+            letter-spacing: -0.025em;
+            color: var(--charcoal);
+            margin-bottom: 1.75rem;
+            font-variation-settings: "opsz" 144, "SOFT" 50;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out) 0.2s forwards;
         }
 
-        .hero h1 .accent {
-            color: var(--accent);
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--terracotta-deep);
+            font-variation-settings: "opsz" 144, "SOFT" 100;
         }
 
-        .hero .lead {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 620px;
-            margin-bottom: 2rem;
+        .hero-lead {
+            font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+            line-height: 1.55;
+            color: var(--charcoal-soft);
+            max-width: 640px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out) 0.35s forwards;
         }
 
-        .status-pill {
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out) 0.5s forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Buttons */
+        .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 0.9rem;
-            background: var(--accent-glow);
-            border: 1px solid rgba(79, 124, 255, 0.3);
-            border-radius: 100px;
-            font-size: 0.85rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .status-pill::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        section {
-            margin-bottom: 4rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
+            gap: 0.6rem;
+            padding: 0.95rem 1.6rem;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 1.25rem;
-            color: var(--text);
-            letter-spacing: -0.01em;
+            letter-spacing: -0.005em;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.35s var(--ease-out);
+            text-decoration: none;
+            border: none;
+            position: relative;
         }
 
-        .services {
+        .btn-primary {
+            background: var(--charcoal);
+            color: var(--cream);
+            box-shadow: var(--shadow-warm);
+        }
+
+        .btn-primary:hover {
+            background: var(--terracotta-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 18px 36px -12px rgba(168, 85, 57, 0.45);
+        }
+
+        .btn-primary .arrow { transition: transform 0.35s var(--ease-out); }
+        .btn-primary:hover .arrow { transform: translateX(4px); }
+
+        .btn-ghost {
+            color: var(--charcoal);
+            padding: 0.95rem 0.4rem;
+            background: transparent;
+            border-bottom: 1px solid var(--charcoal);
+            border-radius: 0;
+        }
+
+        .btn-ghost:hover {
+            color: var(--terracotta-deep);
+            border-bottom-color: var(--terracotta-deep);
+        }
+
+        /* ========== SECTIONS ========== */
+        section { position: relative; padding: 5rem 0; }
+
+        @media (min-width: 768px) {
+            section { padding: 7rem 0; }
+        }
+
+        .section-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            color: var(--terracotta-deep);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .section-eyebrow::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--terracotta);
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(1.85rem, 4vw, 2.85rem);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            font-variation-settings: "opsz" 96, "SOFT" 50;
+        }
+
+        .section-title em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--terracotta-deep);
+        }
+
+        .section-lead {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--charcoal-soft);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        /* ========== THE WORK ========== */
+        .work-section {
+            background: var(--cream);
+            border-top: 1px solid var(--line);
+        }
+
+        .work-grid {
             display: grid;
             grid-template-columns: 1fr;
+            gap: 0;
+            margin-top: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .work-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .work-item {
+            padding: 2rem 0;
+            border-top: 1px solid var(--line);
+            position: relative;
+            transition: all 0.4s var(--ease-out);
+        }
+
+        @media (min-width: 768px) {
+            .work-item {
+                padding: 2.5rem 2rem;
+                border-right: 1px solid var(--line);
+            }
+            .work-item:nth-child(2n) { border-right: none; }
+        }
+
+        .work-item-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            color: var(--muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .work-item h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 1.5rem;
+            line-height: 1.2;
+            color: var(--charcoal);
+            margin-bottom: 0.85rem;
+            font-variation-settings: "opsz" 36, "SOFT" 50;
+            transition: color 0.35s var(--ease-out);
+        }
+
+        .work-item p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--charcoal-soft);
+        }
+
+        .work-item:hover h3 { color: var(--terracotta-deep); }
+
+        /* ========== HOW WE BUILD — accordion mobile, expanded desktop ========== */
+        .build-section {
+            background: var(--charcoal);
+            color: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .build-section .section-title { color: var(--cream); }
+        .build-section .section-title em { color: var(--terracotta-glow); }
+        .build-section .section-lead { color: var(--muted-on-dark); }
+        .build-section .section-eyebrow { color: var(--terracotta-glow); }
+        .build-section .section-eyebrow::before { background: var(--terracotta-glow); }
+
+        /* Decorative warm light bleed */
+        .build-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(198, 106, 79, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .build-list {
+            list-style: none;
+            margin-top: 3rem;
+            border-top: 1px solid var(--line-on-dark);
+            position: relative;
+        }
+
+        .build-step {
+            border-bottom: 1px solid var(--line-on-dark);
+            position: relative;
+        }
+
+        .build-step-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.75rem 0;
+            cursor: pointer;
+            transition: padding 0.35s var(--ease-out);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .build-step-header:hover { padding-left: 0.5rem; }
+
+        .build-step-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            color: var(--terracotta-glow);
+            padding-top: 0.4rem;
+            min-width: 38px;
+            flex-shrink: 0;
+        }
+
+        .build-step-title-wrap {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             gap: 1rem;
         }
 
-        @media (min-width: 640px) {
-            .services {
-                grid-template-columns: 1fr 1fr;
+        .build-step h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+            line-height: 1.25;
+            color: var(--cream);
+            font-variation-settings: "opsz" 48, "SOFT" 50;
+        }
+
+        .build-step-toggle {
+            color: var(--terracotta-glow);
+            font-size: 1.5rem;
+            line-height: 1;
+            font-weight: 300;
+            transition: transform 0.4s var(--ease-out);
+            flex-shrink: 0;
+            padding-top: 0.2rem;
+        }
+
+        .build-step-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s var(--ease-out);
+        }
+
+        .build-step-body-inner {
+            padding: 0 0 2rem 3.4rem;
+            font-size: 1.02rem;
+            line-height: 1.65;
+            color: var(--muted-on-dark);
+            max-width: 700px;
+        }
+
+        .build-step.open .build-step-body { max-height: 400px; }
+        .build-step.open .build-step-toggle { transform: rotate(45deg); }
+
+        @media (min-width: 768px) {
+            .build-step-toggle { display: none; }
+            .build-step-header { cursor: default; }
+            .build-step-header:hover { padding-left: 0; }
+            .build-step-body { max-height: none !important; overflow: visible; }
+        }
+
+        /* ========== PRINCIPLES ========== */
+        .principles-section { background: var(--cream-warm); }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--line);
+        }
+
+        @media (min-width: 768px) {
+            .principles-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        .principle {
+            padding: 2.25rem 0;
+            border-bottom: 1px solid var(--line);
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .principle {
+                padding: 2.5rem 2.5rem 2.5rem 0;
+                border-right: 1px solid var(--line);
+            }
+            .principle:nth-child(2n) {
+                border-right: none;
+                padding-left: 2.5rem;
+                padding-right: 0;
             }
         }
 
-        .service-card {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: border-color 0.2s ease;
+        .principle-mark {
+            font-family: 'Fraunces', serif;
+            font-size: 2.5rem;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--terracotta);
+            line-height: 1;
+            margin-bottom: 0.75rem;
+            font-variation-settings: "opsz" 144;
         }
 
-        .service-card:hover {
-            border-color: var(--accent);
+        .principle h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 1.35rem;
+            line-height: 1.25;
+            color: var(--charcoal);
+            margin-bottom: 0.65rem;
+            font-variation-settings: "opsz" 36, "SOFT" 50;
         }
 
-        .service-card h3 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text);
+        .principle p {
+            font-size: 0.97rem;
+            line-height: 1.6;
+            color: var(--charcoal-soft);
         }
 
-        .service-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        /* ========== CONTACT ========== */
+        .contact-section {
+            background: var(--cream);
+            position: relative;
+            overflow: hidden;
         }
 
-        .approach-list {
-            list-style: none;
-            padding: 0;
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            bottom: -300px;
+            left: -200px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(198, 106, 79, 0.08) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-        .approach-list li {
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border);
-            color: var(--text-muted);
+        .contact-content {
+            max-width: 720px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-headline {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            font-variation-settings: "opsz" 144, "SOFT" 60;
+        }
+
+        .contact-headline em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--terracotta-deep);
+        }
+
+        .contact-lead {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--charcoal-soft);
+            margin-bottom: 2.5rem;
+            max-width: 580px;
+        }
+
+        .contact-card {
+            display: inline-flex;
+            align-items: center;
+            background: var(--charcoal);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: var(--shadow-warm);
+            text-decoration: none;
+            transition: all 0.4s var(--ease-out);
+            max-width: 100%;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 22px 44px -18px rgba(61, 58, 54, 0.32);
+        }
+
+        .contact-card-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            color: var(--terracotta-glow);
+            text-transform: uppercase;
+            padding: 1.2rem 1.25rem;
+            border-right: 1px solid var(--line-on-dark);
+            white-space: nowrap;
+        }
+
+        .contact-card-email {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.15rem;
+            color: var(--cream);
+            padding: 1.2rem 1.5rem 1.2rem 1.25rem;
+            transition: color 0.35s var(--ease-out);
+            font-variation-settings: "opsz" 36, "SOFT" 50;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .contact-card:hover .contact-card-email { color: var(--terracotta-glow); }
+
+        @media (max-width: 480px) {
+            .contact-card { display: flex; flex-direction: column; align-items: stretch; }
+            .contact-card-label { border-right: none; border-bottom: 1px solid var(--line-on-dark); text-align: center; }
+            .contact-card-email { text-align: center; padding: 1.2rem; }
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--charcoal);
+            color: var(--muted-on-dark);
+            padding: 3rem 0 2rem;
+            font-size: 0.87rem;
+        }
+
+        .footer-row {
             display: flex;
-            gap: 1rem;
+            flex-direction: column;
+            gap: 1.5rem;
             align-items: flex-start;
         }
 
-        .approach-list li:last-child {
-            border-bottom: none;
-        }
-
-        .approach-list strong {
-            color: var(--text);
-            font-weight: 600;
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .approach-marker {
-            color: var(--accent);
-            font-weight: 700;
-            min-width: 1.5rem;
-        }
-
-        .contact-block {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem 1.5rem;
-            text-align: center;
-        }
-
-        .contact-block p {
-            color: var(--text-muted);
-            margin-bottom: 1.25rem;
-        }
-
-        .contact-email {
-            display: inline-block;
-            font-size: 1.15rem;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.75rem 1.5rem;
-            border: 1px solid var(--accent);
-            border-radius: 8px;
-            transition: background 0.2s ease;
-        }
-
-        .contact-email:hover {
-            background: var(--accent-glow);
-        }
-
-        footer {
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-            margin-top: 2rem;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        @media (min-width: 640px) {
-            .footer-content {
+        @media (min-width: 768px) {
+            .footer-row {
                 flex-direction: row;
                 justify-content: space-between;
-                text-align: left;
+                align-items: center;
             }
         }
+
+        .footer-brand {
+            font-family: 'Fraunces', serif;
+            font-size: 1.05rem;
+            color: var(--cream);
+            font-weight: 500;
+            font-variation-settings: "opsz" 36, "SOFT" 30;
+        }
+
+        .footer-brand .accent {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--terracotta-glow);
+        }
+
+        .footer-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted-on-dark);
+        }
+
+        .footer-line {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--muted-on-dark);
+            font-variation-settings: "opsz" 24, "SOFT" 80;
+        }
+
+        /* Scroll-triggered reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .embers { display: none; }
+            .reveal { opacity: 1; transform: none; }
+        }
+
+        ::selection { background: var(--terracotta); color: var(--cream); }
     </style>
 </head>
 <body>
+
+    <!-- Atmospheric grain texture across whole page -->
+    <svg class="grain" xmlns="http://www.w3.org/2000/svg">
+        <filter id="noiseFilter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/>
+            <feColorMatrix values="0 0 0 0 0.24
+                                   0 0 0 0 0.23
+                                   0 0 0 0 0.21
+                                   0 0 0 0.55 0"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+    </svg>
+
+    <!-- ============== HEADER ============== -->
     <header>
         <div class="container">
-            <div class="logo">Clear<span class="logo-accent">Forge</span></div>
+            <div class="header-row">
+                <a href="/" class="brand" aria-label="ClearForge LLC home">
+                    <span class="brand-mark" aria-hidden="true"></span>
+                    <span class="brand-name">Clear<span class="accent">Forge</span></span>
+                </a>
+                <div class="header-meta">
+                    LLC<span class="dot"></span>NC
+                </div>
+            </div>
         </div>
     </header>
 
-    <main>
+    <!-- ============== HERO ============== -->
+    <section class="hero">
+        <canvas class="embers" id="embers" aria-hidden="true"></canvas>
         <div class="container">
-            <section class="hero">
-                <span class="status-pill">Building in 2026</span>
+            <div class="hero-content">
+                <div class="hero-eyebrow">Building in 2026</div>
                 <h1>
-                    Custom software and digital solutions
-                    <span class="accent">built around your problem.</span>
+                    Custom software, <em>made by hand,</em> built around your actual problem.
                 </h1>
-                <p class="lead">
-                    ClearForge LLC is a North Carolina software and digital services company. We work with small businesses and individuals to identify operational gaps and build the right tool to close them — from scratch, around the actual problem, with the people who'll use it daily.
+                <p class="hero-lead">
+                    ClearForge is a small North Carolina software shop. We work with individuals and small businesses to find the friction in their day &mdash; the manual process, the spreadsheet held together with hope, the workflow nobody loves &mdash; and build the right tool to take the weight off.
                 </p>
-            </section>
-
-            <section>
-                <h2>What we do</h2>
-                <div class="services">
-                    <div class="service-card">
-                        <h3>Custom Software</h3>
-                        <p>Web applications, progressive web apps, and SaaS products built to your specifications.</p>
-                    </div>
-                    <div class="service-card">
-                        <h3>Digital Infrastructure</h3>
-                        <p>Backend systems, databases, automation, and integrations that scale with your operation.</p>
-                    </div>
-                    <div class="service-card">
-                        <h3>Multilingual Solutions</h3>
-                        <p>Software designed for multilingual teams from the architectural foundation, not bolted on later.</p>
-                    </div>
-                    <div class="service-card">
-                        <h3>Domain-Specific Tools</h3>
-                        <p>Industry tools built by people who've worked the floor — software that respects how the work actually happens.</p>
-                    </div>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Start a conversation</span>
+                        <span class="arrow">&rarr;</span>
+                    </a>
+                    <a href="#how" class="btn btn-ghost">See how we work</a>
                 </div>
-            </section>
-
-            <section>
-                <h2>How we approach a build</h2>
-                <ul class="approach-list">
-                    <li>
-                        <span class="approach-marker">01</span>
-                        <div>
-                            <strong>Identify the real problem</strong>
-                            We start by understanding the operational gap, not the requested feature list. The right tool comes after the right understanding.
-                        </div>
-                    </li>
-                    <li>
-                        <span class="approach-marker">02</span>
-                        <div>
-                            <strong>Build from the ground up</strong>
-                            Custom software for the specific problem, not a configured template. The architecture serves the use case, not the other way around.
-                        </div>
-                    </li>
-                    <li>
-                        <span class="approach-marker">03</span>
-                        <div>
-                            <strong>Onboard with the people who'll use it</strong>
-                            Tools that aren't adopted are tools that fail. We work alongside the people who'll touch the system every day.
-                        </div>
-                    </li>
-                    <li>
-                        <span class="approach-marker">04</span>
-                        <div>
-                            <strong>Iterate based on real use</strong>
-                            What's used reveals what should change. We expand based on data, not assumptions.
-                        </div>
-                    </li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Get in touch</h2>
-                <div class="contact-block">
-                    <p>We're currently selective about new engagements while we focus on early build work. If you have a project in mind, we'd like to hear about it.</p>
-                    <a href="mailto:team@clearforge.dev" class="contact-email">team@clearforge.dev</a>
-                </div>
-            </section>
+            </div>
         </div>
-    </main>
+    </section>
 
+    <!-- ============== THE WORK ============== -->
+    <section class="work-section reveal" id="work">
+        <div class="container">
+            <div class="section-eyebrow">What we build</div>
+            <h2 class="section-title">Tools that fit the work, <em>not the other way around.</em></h2>
+            <p class="section-lead">
+                We don't sell off-the-shelf templates dressed up as products. Every build starts with the actual problem and gets shaped around the people who'll use it daily.
+            </p>
+
+            <div class="work-grid">
+                <div class="work-item">
+                    <div class="work-item-num">01</div>
+                    <h3>Custom Software</h3>
+                    <p>Web applications and progressive web apps built from the ground up. Yours alone, not a configured fork of someone else's idea.</p>
+                </div>
+                <div class="work-item">
+                    <div class="work-item-num">02</div>
+                    <h3>Digital Infrastructure</h3>
+                    <p>Databases, automation, integrations, and the quiet plumbing that makes everything else work without you thinking about it.</p>
+                </div>
+                <div class="work-item">
+                    <div class="work-item-num">03</div>
+                    <h3>Multilingual by Design</h3>
+                    <p>Software architected for multilingual teams from day one, not bolted on later. Your whole team can use what we build &mdash; in their language.</p>
+                </div>
+                <div class="work-item">
+                    <div class="work-item-num">04</div>
+                    <h3>Domain-Specific Tools</h3>
+                    <p>Industry tools made by people who've actually worked the floor. Software that respects how the work really happens.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== HOW WE BUILD ============== -->
+    <section class="build-section reveal" id="how">
+        <div class="container">
+            <div class="section-eyebrow">How we work</div>
+            <h2 class="section-title">Slow on purpose. <em>Honest by design.</em></h2>
+            <p class="section-lead">
+                We take on a small number of projects at a time so each one gets the attention it deserves. On mobile, tap any step to read more.
+            </p>
+
+            <ul class="build-list">
+                <li class="build-step open">
+                    <div class="build-step-header" role="button" aria-expanded="true">
+                        <span class="build-step-num">01</span>
+                        <div class="build-step-title-wrap">
+                            <h3>Listen for the real problem</h3>
+                            <span class="build-step-toggle" aria-hidden="true">+</span>
+                        </div>
+                    </div>
+                    <div class="build-step-body">
+                        <div class="build-step-body-inner">
+                            We start by understanding the operational gap, not the feature list. The right tool comes after the right understanding &mdash; which usually means asking better questions than &ldquo;what do you want it to do.&rdquo;
+                        </div>
+                    </div>
+                </li>
+                <li class="build-step">
+                    <div class="build-step-header" role="button" aria-expanded="false">
+                        <span class="build-step-num">02</span>
+                        <div class="build-step-title-wrap">
+                            <h3>Build from the ground up</h3>
+                            <span class="build-step-toggle" aria-hidden="true">+</span>
+                        </div>
+                    </div>
+                    <div class="build-step-body">
+                        <div class="build-step-body-inner">
+                            Custom software, written for your specific problem. The architecture serves the work, not the other way around. No template inheritance dressed up as a product.
+                        </div>
+                    </div>
+                </li>
+                <li class="build-step">
+                    <div class="build-step-header" role="button" aria-expanded="false">
+                        <span class="build-step-num">03</span>
+                        <div class="build-step-title-wrap">
+                            <h3>Onboard alongside the people who'll use it</h3>
+                            <span class="build-step-toggle" aria-hidden="true">+</span>
+                        </div>
+                    </div>
+                    <div class="build-step-body">
+                        <div class="build-step-body-inner">
+                            Tools that aren't adopted are tools that fail. We work next to the people who'll touch the system every day &mdash; in the kitchen, behind the counter, at the bench, wherever the work actually lives.
+                        </div>
+                    </div>
+                </li>
+                <li class="build-step">
+                    <div class="build-step-header" role="button" aria-expanded="false">
+                        <span class="build-step-num">04</span>
+                        <div class="build-step-title-wrap">
+                            <h3>Grow with you, on real use</h3>
+                            <span class="build-step-toggle" aria-hidden="true">+</span>
+                        </div>
+                    </div>
+                    <div class="build-step-body">
+                        <div class="build-step-body-inner">
+                            What gets used reveals what should change. Your tool isn't frozen at launch &mdash; it adapts as your business does. We expand based on what the data actually shows, not assumptions.
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ============== PRINCIPLES ============== -->
+    <section class="principles-section reveal" id="principles">
+        <div class="container">
+            <div class="section-eyebrow">What we hold to</div>
+            <h2 class="section-title">A few things <em>we don't move on.</em></h2>
+            <p class="section-lead">
+                The shorter list. The one that matters.
+            </p>
+
+            <div class="principles-grid">
+                <div class="principle">
+                    <div class="principle-mark">&ldquo;</div>
+                    <h3>Clarity is a form of respect.</h3>
+                    <p>For your time, your money, and the people who'll inherit what we build. We say what we mean and price what we charge.</p>
+                </div>
+                <div class="principle">
+                    <div class="principle-mark">&ldquo;</div>
+                    <h3>The work has to be true before it's anything else.</h3>
+                    <p>Honest scope. Honest progress. Honest about what we don't know yet. We'd rather lose a project than fudge a promise.</p>
+                </div>
+                <div class="principle">
+                    <div class="principle-mark">&ldquo;</div>
+                    <h3>Tools serve the people, not the other way around.</h3>
+                    <p>Software is supposed to lift weight off your shoulders, not add a new shape of weight. If it doesn't make the work feel lighter, it isn't done.</p>
+                </div>
+                <div class="principle">
+                    <div class="principle-mark">&ldquo;</div>
+                    <h3>We work as if the work is being seen.</h3>
+                    <p>Code we'd be glad to put our name on. Pricing that reads the same way to you and to us. The standard doesn't drop when no one's looking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== CONTACT ============== -->
+    <section class="contact-section reveal" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="section-eyebrow">Get in touch</div>
+                <h2 class="contact-headline">If your work needs a tool that <em>doesn't yet exist,</em> we'd be honored to hear about it.</h2>
+                <p class="contact-lead">
+                    We're a small shop, taking on a small number of projects at a time. Send a note &mdash; tell us about the friction, the manual process, the workflow nobody loves. We'll write back.
+                </p>
+                <a href="mailto:team@clearforge.dev?subject=Project%20inquiry" class="contact-card" aria-label="Email us at team@clearforge.dev">
+                    <span class="contact-card-label">Write us</span>
+                    <span class="contact-card-email">team@clearforge.dev</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============== FOOTER ============== -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div>&copy; 2026 ClearForge LLC. All rights reserved.</div>
-                <div>North Carolina, United States</div>
+            <div class="footer-row">
+                <div class="footer-brand">Clear<span class="accent">Forge</span> LLC</div>
+                <div class="footer-line">Made by hand in North Carolina.</div>
+                <div class="footer-meta">&copy; 2026 &middot; All rights reserved</div>
             </div>
         </div>
     </footer>
+
+    <script>
+        // ============ Ember field — atmospheric particles in hero ============
+        (function() {
+            const canvas = document.getElementById('embers');
+            if (!canvas) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const ctx = canvas.getContext('2d');
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            const PARTICLE_COUNT = isMobile ? 18 : 38;
+
+            let w, h, particles;
+
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                w = canvas.width = rect.width * dpr;
+                h = canvas.height = rect.height * dpr;
+                canvas.style.width = rect.width + 'px';
+                canvas.style.height = rect.height + 'px';
+                ctx.scale(dpr, dpr);
+            }
+
+            function makeParticle() {
+                return {
+                    x: Math.random() * (w / dpr),
+                    y: (h / dpr) + Math.random() * 100,
+                    vx: (Math.random() - 0.5) * 0.15,
+                    vy: -0.15 - Math.random() * 0.4,
+                    size: 0.8 + Math.random() * 1.6,
+                    life: 0,
+                    maxLife: 200 + Math.random() * 250,
+                    hueShift: Math.random()
+                };
+            }
+
+            function init() {
+                resize();
+                particles = Array.from({length: PARTICLE_COUNT}, makeParticle);
+            }
+
+            function step() {
+                ctx.clearRect(0, 0, w / dpr, h / dpr);
+                particles.forEach((p, i) => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life++;
+                    if (p.life > p.maxLife || p.y < -10) {
+                        particles[i] = makeParticle();
+                        return;
+                    }
+                    const lifeRatio = p.life / p.maxLife;
+                    const fade = Math.sin(lifeRatio * Math.PI);
+                    const alpha = fade * 0.35;
+                    const r = 198 + (p.hueShift * 30 - 15);
+                    const g = 106 + (p.hueShift * 20 - 10);
+                    const b = 79;
+                    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                requestAnimationFrame(step);
+            }
+
+            init();
+            step();
+            window.addEventListener('resize', () => {
+                resize();
+                particles = Array.from({length: PARTICLE_COUNT}, makeParticle);
+            });
+        })();
+
+        // ============ Mobile accordion: build steps ============
+        (function() {
+            const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+            if (isDesktop) return;
+
+            const steps = document.querySelectorAll('.build-step');
+            steps.forEach(step => {
+                const header = step.querySelector('.build-step-header');
+                header.addEventListener('click', () => {
+                    const isOpen = step.classList.contains('open');
+                    steps.forEach(s => {
+                        s.classList.remove('open');
+                        const h = s.querySelector('.build-step-header');
+                        if (h) h.setAttribute('aria-expanded', 'false');
+                    });
+                    if (!isOpen) {
+                        step.classList.add('open');
+                        header.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+        })();
+
+        // ============ Scroll-triggered reveal ============
+        (function() {
+            if (!('IntersectionObserver' in window)) {
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        })();
+    </script>
 </body>
 </html>

@@ -8,9 +8,9 @@ This is the public-facing landing page deployed to `clearforge.dev`. It's a sing
 
 ## Stack
 
-- **Hosting:** Cloudflare Pages
+- **Hosting:** GitHub Pages (custom domain via Cloudflare DNS)
 - **DNS:** Cloudflare (clearforge.dev)
-- **Source:** Pure HTML + CSS, no build step
+- **Source:** Single-file HTML with inline CSS + tiny inline JS, no build step
 
 ## Local development
 
@@ -24,7 +24,7 @@ python3 -m http.server 8000
 
 ## Deployment
 
-Deployed automatically via Cloudflare Pages on every push to `main`. No build command, no output directory — Cloudflare serves the repo root as static content.
+Deployed automatically via GitHub Pages on push to `main`. No build command, no output directory — GitHub Pages serves the repo root as static content. Custom domain configured via the `CNAME` file (`www.clearforge.dev`).
 
 ## Status
 

@@ -48,8 +48,8 @@ Legend:
 | Master | ✅ | ClearForge-Icon-v1.0-Master.svg |
 | Light | 📋 | ClearForge-Icon-v1.0-Light.svg |
 | Dark | 📋 | ClearForge-Icon-v1.0-Dark.svg |
-| TrueWhite | 📋 | ClearForge-Icon-v1.0-TrueWhite.svg |
-| TrueBlack | 📋 | ClearForge-Icon-v1.0-TrueBlack.svg |
+| TrueWhite | ✅ | ClearForge-Icon-v1.0-TrueWhite.svg |
+| TrueBlack | ✅ | ClearForge-Icon-v1.0-TrueBlack.svg |
 
 ### Icon Squared (graphic + text, square aspect)
 
@@ -142,5 +142,6 @@ Once all SVGs are locked, generate downstream artifacts:
 
 **Total: 31 SVG files** + downstream PNGs and derivative artifacts.
 
-Currently committed: **8 of 31 SVGs** (Wordmark Master/MonoDark/MonoLight/TrueWhite/TrueBlack (complete),
-Icon Master, Logo Master, Logo Transparent).
+Currently committed: **10 of 31 SVGs** (Wordmark family complete (5),
+Icon Master + TrueWhite + TrueBlack,
+Logo Master + Transparent).

@@ -46,8 +46,8 @@ Legend:
 | Variant | Status | File |
 |---|---|---|
 | Master | ✅ | ClearForge-Icon-v1.0-Master.svg |
-| Light | 📋 | ClearForge-Icon-v1.0-Light.svg |
-| Dark | 📋 | ClearForge-Icon-v1.0-Dark.svg |
+| MonoLight | ✅ | ClearForge-Icon-v1.0-MonoLight.svg |
+| MonoDark | ✅ | ClearForge-Icon-v1.0-MonoDark.svg |
 | TrueWhite | ✅ | ClearForge-Icon-v1.0-TrueWhite.svg |
 | TrueBlack | ✅ | ClearForge-Icon-v1.0-TrueBlack.svg |
 
@@ -86,9 +86,9 @@ Legend:
 
 | Variant | Status | File |
 |---|---|---|
-| Master | 📋 | ClearForge-IconMark-v1.0-Master.svg |
-| Light | 📋 | ClearForge-IconMark-v1.0-Light.svg |
-| Dark | 📋 | ClearForge-IconMark-v1.0-Dark.svg |
+| Master | ✅ | ClearForge-IconMark-v1.0-Master.svg |
+| MonoLight | ✅ | ClearForge-IconMark-v1.0-MonoLight.svg |
+| MonoDark | ✅ | ClearForge-IconMark-v1.0-MonoDark.svg |
 | TrueWhite | 📋 | ClearForge-IconMark-v1.0-TrueWhite.svg |
 | TrueBlack | 📋 | ClearForge-IconMark-v1.0-TrueBlack.svg |
 
@@ -142,6 +142,7 @@ Once all SVGs are locked, generate downstream artifacts:
 
 **Total: 31 SVG files** + downstream PNGs and derivative artifacts.
 
-Currently committed: **10 of 31 SVGs** (Wordmark family complete (5),
-Icon Master + TrueWhite + TrueBlack,
-Logo Master + Transparent).
+Currently committed: **15 of 31 SVGs** (Wordmark family complete (5),
+Icon Master + MonoLight + MonoDark + TrueWhite + TrueBlack (5/5),
+Logo Master + Transparent (2/6),
+IconMark Master + MonoLight + MonoDark (3/5)).

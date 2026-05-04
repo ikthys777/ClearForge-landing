@@ -142,7 +142,7 @@ Once all SVGs are locked, generate downstream artifacts:
 
 **Total: 31 SVG files** + downstream PNGs and derivative artifacts.
 
-Currently committed: **21 of 35 SVGs** (Wordmark family complete (5),
+Currently committed: **23 of 35 SVGs** (Wordmark family complete (5),
 Icon Master + MonoLight + MonoDark + TrueWhite + TrueBlack (5/5),
 Logo Master + Transparent (2/6),
 IconMark family complete (5/5)).

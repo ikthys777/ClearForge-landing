@@ -69,8 +69,8 @@ Legend:
 | Transparent | ✅ | ClearForge-Logo-v1.0-Transparent.svg |
 | MonoLight | ✅ | ClearForge-Logo-v1.0-MonoLight.svg |
 | MonoDark | ✅ | ClearForge-Logo-v1.0-MonoDark.svg |
-| TrueWhite | 📋 | ClearForge-Logo-v1.0-TrueWhite.svg |
-| TrueBlack | 📋 | ClearForge-Logo-v1.0-TrueBlack.svg |
+| TrueWhite | ✅ | ClearForge-Logo-v1.0-TrueWhite.svg |
+| TrueBlack | ✅ | ClearForge-Logo-v1.0-TrueBlack.svg |
 
 ### Logo Squared (graphic + text, square aspect)
 
@@ -142,7 +142,7 @@ Once all SVGs are locked, generate downstream artifacts:
 
 **Total: 31 SVG files** + downstream PNGs and derivative artifacts.
 
-Currently committed: **19 of 31 SVGs** (Wordmark family complete (5),
+Currently committed: **21 of 31 SVGs** (Wordmark family complete (5),
 Icon Master + MonoLight + MonoDark + TrueWhite + TrueBlack (5/5),
 Logo Master + Transparent (2/6),
 IconMark family complete (5/5)).

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearSeal — A security standard for AI agent tool servers</title>
+<meta name="description" content="A security standard for the MCP servers that let AI agents act on real systems: what the protocol doesn&#x27;t cover, and how to close it.">
+<meta name="author" content="Scotty, ClearForge LLC">
+<link rel="canonical" href="https://clearforge.dev/clearseal/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClearForge">
+<meta property="og:title" content="ClearSeal">
+<meta property="og:description" content="A security standard for the MCP servers that let AI agents act on real systems: what the protocol doesn&#x27;t cover, and how to close it.">
+<meta property="og:url" content="https://clearforge.dev/clearseal/">
+<meta property="og:image" content="https://clearforge.dev/clearseal/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="ClearSeal, by ClearForge">
+<meta property="article:published_time" content="2026-09-21">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#3D3A36">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F4EFE8;--cream-warm:#EFE8DD;--charcoal:#3D3A36;--muted:#6B6660;--terracotta:#C66A4F;--terracotta-deep:#A85539;--line:rgba(61,58,54,.14)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;font-size:18px;line-height:1.7;color:var(--charcoal);background:var(--cream);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--terracotta-deep);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--charcoal)}
+a:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px;border-radius:2px}
+.site{max-width:44rem;margin:0 auto;padding:1.75rem 1.5rem 0}
+.site a{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;color:var(--charcoal);text-decoration:none}
+header.hero{max-width:44rem;margin:0 auto;padding:4.5rem 1.5rem 3rem;border-bottom:1px solid var(--line)}
+h1{font-family:'Fraunces',serif;font-weight:500;font-variation-settings:'opsz' 144,'SOFT' 30;font-size:clamp(2.75rem,8vw,4.5rem);line-height:1.02;letter-spacing:-.02em}
+.dek{margin-top:1.5rem;font-size:1.2rem;line-height:1.55;color:var(--muted);max-width:36rem}
+.byline{margin-top:1.75rem;font-size:.95rem;color:var(--muted)}
+article{max-width:44rem;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+article>*+*{margin-top:1.15rem}
+h2{font-family:'Fraunces',serif;font-weight:550;font-variation-settings:'opsz' 48;font-size:1.75rem;line-height:1.2;letter-spacing:-.01em;margin-top:3.25rem!important}
+article>h2:first-child{margin-top:0!important}
+h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.2rem;margin-top:2rem!important}
+h3 small{font-family:'Manrope',sans-serif;font-weight:400;font-size:.9rem;color:var(--muted);margin-left:.4rem}
+blockquote{border-left:3px solid var(--terracotta);padding:.25rem 0 .25rem 1.25rem;font-family:'Fraunces',serif;font-size:1.3rem;line-height:1.5;font-variation-settings:'opsz' 24}
+blockquote p{margin:0}
+ul{padding-left:1.25rem} li+li{margin-top:.6rem}
+strong{font-weight:650}
+code{font-size:.88em;background:var(--cream-warm);padding:.1em .35em;border-radius:3px}
+.cards{list-style:none;padding:0}
+.cards li{padding:1rem 0;border-bottom:1px solid var(--line)}
+.cards li+li{margin-top:0}
+.cards a{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem}
+.cards p{margin-top:.25rem;color:var(--charcoal)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:32rem}
+th,td{text-align:left;vertical-align:top;padding:.7rem .75rem .7rem 0;border-bottom:1px solid var(--line)}
+th{font-weight:650}
+td:first-child{width:38%}
+.note{font-size:.95rem;color:var(--muted)}
+.next{margin-top:2.5rem!important;padding:1.25rem 1.5rem;background:var(--cream-warm);border-radius:6px}
+.next p+p{margin-top:.5rem}
+footer{max-width:44rem;margin:0 auto;padding:2rem 1.5rem 3rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted)}
+footer p+p{margin-top:.6rem}
+@media (max-width:600px){
+ .table-wrap{overflow:visible} table{min-width:0}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:100%!important}
+ tr{padding:1rem 0;border-bottom:1px solid var(--line)}
+ td{border:0;padding:.15rem 0}
+ td:first-child{font-weight:650;font-family:'Fraunces',serif;font-size:1.1rem}
+}
+@media (max-width:480px){body{font-size:17px}header.hero{padding-top:3rem}}
+</style>
+</head>
+<body>
+<nav class="site"><a href="/">ClearForge</a></nav>
+<header class="hero">
+<h1>ClearSeal</h1>
+<p class="dek">A security standard for the servers that let AI agents act on real systems.</p>
+<p class="byline">Scotty, ClearForge LLC · Version 0.8 · CC BY 4.0</p>
+</header>
+<article>
+<h2>The problem, in plain terms</h2>
+<p>AI assistants increasingly act on real systems through <strong>MCP servers</strong> — small programs that hand a model a set of tools: read a file, send a message, run a command. The model decides which tool to use by reading each tool's description, which means <strong>a tool description is effectively an instruction to the model.</strong></p>
+<p>The protocol handles <em>who is calling</em>: its 2026-07-28 revision made OAuth 2.1 and audience-bound tokens mandatory. It does not answer the questions that come next:</p>
+<ul>
+<li>Is this tool the one someone actually reviewed, or has its description changed since?</li>
+<li>How far can this tool reach — and is that bound itself protected, or just described?</li>
+<li>When a message claims to come from your own infrastructure, did it?</li>
+</ul>
+<p>ClearSeal is the layer that answers them, built on top of the protocol's own security rather than re-inventing it.</p>
+
+<h2>One discipline</h2>
+<blockquote><p>Sign → verify against a pinned reference → fail closed, at an off&#8209;box gate.</p></blockquote>
+<p>Applied to every artifact that enters a model's context or crosses between servers. “Pinned” means an approved copy is fingerprinted, and anything that no longer matches the fingerprint is treated as an incident. “Fail closed” means that when verification can't succeed, the answer is no.</p>
+
+<h2>What it adds</h2>
+<ul>
+<li><strong>Tool-definition pinning.</strong> Every tool description is fingerprinted when it is approved and re-checked every time it loads; a change nobody approved raises an alert. It stops tool poisoning and silent swaps, and the standard ranks it as the highest security-per-effort control it contains.</li>
+<li><strong>A four-rung danger ladder.</strong> Every tool is classed <code>read_only</code>, <code>owned_state</code>, <code>state_change</code> or <code>arbitrary_exec</code>. A tool that faces untrusted input <em>and</em> can change things needs a human confirmation or proven containment — the “Rule of Two.”</li>
+<li><strong>Pin everything a gate reads.</strong> If a security check decides on a property the fingerprint doesn't cover, that property can be flipped and nothing goes red. The standard fixes the tool definition at ten fingerprinted fields and requires a test that fails when a gate reads anything outside them.</li>
+<li><strong>Containment that travels.</strong> On platforms where network isolation isn't possible, a tool declares the exact set of places it may reach. The set itself is fingerprinted, so widening a tool's reach is detectable by construction.</li>
+<li><strong>Signed messages from the infrastructure.</strong> Status alerts and reports sent to the operator are signed and checked against who may speak on that channel and what a message may ask for. A valid signature proves who spoke; it does not grant permission.</li>
+<li><strong>An audit procedure.</strong> A nine-step review for any MCP server — inventory, exposure, classification, vulnerability pass, and a sweep for security decisions that rest on unprotected inputs — ending in a split between fix-now problems and structural refactors.</li>
+</ul>
+
+<h2>What it is not</h2>
+<p>ClearSeal is an integrity and authenticity control. It proves <em>what</em> an artifact is, <em>who</em> produced it, over <em>which</em> channel, <em>how recently</em>, and <em>with what capability</em>. It never proves intent — so it is <strong>not a prompt-injection defense</strong>, and the standard names believing otherwise as its primary failure mode.</p>
+<p>Proving an action is authentic is not the same as making it safe. Safety comes from narrow tool scopes and limits on where tools can reach. In the standard's own words: signing without scoping is a well-authenticated way to get owned.</p>
+
+<h2>How it was built</h2>
+<p>I authored ClearSeal as its owner — deciding and approving every change — with Claude (Anthropic) as executor, drafting and auditing. It was hardened by building against it. Most of what is in versions 0.6 through 0.8 was found by a builder agent implementing the standard and fed back upstream. The design history keeps the lessons:</p>
+<ul>
+<li><strong>Don't re-derive what the protocol now mandates.</strong> When MCP made OAuth mandatory, the standard dropped its own auth design and required conformance instead.</li>
+<li><strong>Unpinned authority.</strong> The same bug was fixed three times in one day before it was recognised as one bug: a security gate deciding on an input the integrity system didn't cover. A new rule now gets swept against every existing gate, not just the one that prompted it.</li>
+<li><strong>The feedback path is part of the standard.</strong> A mechanism invented while building the reference implementation reached the standard seven days late. A fix that isn't fed back is a fix the next builder re-invents — and nobody audits the second version.</li>
+</ul>
+<p><strong>Status:</strong> version 0.8, investigation phase, in production in one reference implementation. This is the public edition: deployment-specific details are omitted, and section numbers match the full standard so citations resolve in either.</p>
+
+<div class="next">
+<p><strong>Read the standard:</strong> <a href="https://github.com/ClearForge-LLC/ClearSeal-public" rel="noopener">ClearSeal on GitHub</a> — free to use and adapt under CC BY 4.0.</p>
+<p><strong>The failures behind it:</strong> <a href="/proof/">ClearProof</a> · <strong>The method it came from:</strong> <a href="/method/">The Co&#8209;Architect Method</a></p>
+</div>
+</article>
+<footer>
+<p>This page was drafted by Claude (Anthropic) at Scotty's direction from the public edition of the standard, and published with his approval. The standard itself is the source of record.</p>
+<p>© 2026 ClearForge LLC.</p>
+</footer>
+</body>
+</html>

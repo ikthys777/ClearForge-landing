@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearProof — Field notes from building with AI agents</title>
+<meta name="description" content="Fifteen real failures from building production infrastructure with AI agents — each reduced to one rule you can apply to your own systems.">
+<meta name="author" content="Scotty, ClearForge LLC">
+<link rel="canonical" href="https://clearforge.dev/proof/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ClearForge">
+<meta property="og:title" content="ClearProof">
+<meta property="og:description" content="Fifteen real failures from building production infrastructure with AI agents — each reduced to one rule you can apply to your own systems.">
+<meta property="og:url" content="https://clearforge.dev/proof/">
+<meta property="og:image" content="https://clearforge.dev/proof/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="ClearProof, by ClearForge">
+<meta property="article:published_time" content="2026-09-21">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#3D3A36">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=Manrope:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F4EFE8;--cream-warm:#EFE8DD;--charcoal:#3D3A36;--muted:#6B6660;--terracotta:#C66A4F;--terracotta-deep:#A85539;--line:rgba(61,58,54,.14)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;font-size:18px;line-height:1.7;color:var(--charcoal);background:var(--cream);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--terracotta-deep);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--charcoal)}
+a:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px;border-radius:2px}
+.site{max-width:44rem;margin:0 auto;padding:1.75rem 1.5rem 0}
+.site a{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;color:var(--charcoal);text-decoration:none}
+header.hero{max-width:44rem;margin:0 auto;padding:4.5rem 1.5rem 3rem;border-bottom:1px solid var(--line)}
+h1{font-family:'Fraunces',serif;font-weight:500;font-variation-settings:'opsz' 144,'SOFT' 30;font-size:clamp(2.75rem,8vw,4.5rem);line-height:1.02;letter-spacing:-.02em}
+.dek{margin-top:1.5rem;font-size:1.2rem;line-height:1.55;color:var(--muted);max-width:36rem}
+.byline{margin-top:1.75rem;font-size:.95rem;color:var(--muted)}
+article{max-width:44rem;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+article>*+*{margin-top:1.15rem}
+h2{font-family:'Fraunces',serif;font-weight:550;font-variation-settings:'opsz' 48;font-size:1.75rem;line-height:1.2;letter-spacing:-.01em;margin-top:3.25rem!important}
+article>h2:first-child{margin-top:0!important}
+h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.2rem;margin-top:2rem!important}
+h3 small{font-family:'Manrope',sans-serif;font-weight:400;font-size:.9rem;color:var(--muted);margin-left:.4rem}
+blockquote{border-left:3px solid var(--terracotta);padding:.25rem 0 .25rem 1.25rem;font-family:'Fraunces',serif;font-size:1.3rem;line-height:1.5;font-variation-settings:'opsz' 24}
+blockquote p{margin:0}
+ul{padding-left:1.25rem} li+li{margin-top:.6rem}
+strong{font-weight:650}
+code{font-size:.88em;background:var(--cream-warm);padding:.1em .35em;border-radius:3px}
+.cards{list-style:none;padding:0}
+.cards li{padding:1rem 0;border-bottom:1px solid var(--line)}
+.cards li+li{margin-top:0}
+.cards a{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem}
+.cards p{margin-top:.25rem;color:var(--charcoal)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:32rem}
+th,td{text-align:left;vertical-align:top;padding:.7rem .75rem .7rem 0;border-bottom:1px solid var(--line)}
+th{font-weight:650}
+td:first-child{width:38%}
+.note{font-size:.95rem;color:var(--muted)}
+.next{margin-top:2.5rem!important;padding:1.25rem 1.5rem;background:var(--cream-warm);border-radius:6px}
+.next p+p{margin-top:.5rem}
+footer{max-width:44rem;margin:0 auto;padding:2rem 1.5rem 3rem;border-top:1px solid var(--line);font-size:.95rem;color:var(--muted)}
+footer p+p{margin-top:.6rem}
+@media (max-width:600px){
+ .table-wrap{overflow:visible} table{min-width:0}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:100%!important}
+ tr{padding:1rem 0;border-bottom:1px solid var(--line)}
+ td{border:0;padding:.15rem 0}
+ td:first-child{font-weight:650;font-family:'Fraunces',serif;font-size:1.1rem}
+}
+@media (max-width:480px){body{font-size:17px}header.hero{padding-top:3rem}}
+</style>
+</head>
+<body>
+<nav class="site"><a href="/">ClearForge</a></nav>
+<header class="hero">
+<h1>ClearProof</h1>
+<p class="dek">Field notes from building production infrastructure with AI agents. One failure, one rule.</p>
+<p class="byline">Scotty, ClearForge LLC · September 2026</p>
+</header>
+<article>
+<h2>Why publish failures</h2>
+<p>Almost nobody publishes their failure trail. Writeups describe the system that worked, which teaches you what to build and nothing about what to distrust. So the same handful of mistakes get rediscovered, independently, over and over.</p>
+<p>ClearProof is the other half. Every note is a real incident from building a hardened infrastructure stack with AI agents as the builders and a human approving every merge. Each one is sanitised, reproduced, and reduced to a single rule you can apply to a system that looks nothing like mine.</p>
+
+<h2>If you read three</h2>
+<ul class="cards">
+<li><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/a-flag-is-not-a-control.md" rel="noopener">A Flag Is Not a Control</a>
+<p>A security setting that looked like the boundary and wasn't — the real limit sat three files away, unreviewed. Ends with a three-question test you can run on your own system today.</p></li>
+<li><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/the-alarm-that-worked-until-it-was-needed.md" rel="noopener">The Alarm Path Is the Least-Tested Code You Have</a>
+<p>A backup monitor whose failure alert had never once worked, from the day it shipped. It passed two independent reviews.</p></li>
+<li><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/a-goal-it-was-forbidden-to-reach.md" rel="noopener">A Goal Must End Where the Agent's Authority Ends</a>
+<p>What happens when an AI agent is given a goal that only a human is allowed to finish: it keeps trying, indefinitely. About instructing agents, not about code.</p></li>
+</ul>
+
+<h2>The pattern underneath</h2>
+<p>The failure that keeps recurring is <strong>one bug wearing different clothes: a check that reported success while measuring the wrong thing.</strong></p>
+<p>A command meant to find a running process that matched its own command line. A fingerprint that turned out to be the hash of empty input, so a before-and-after comparison “matched” while measuring nothing. Two independent checks that agreed with each other and were both wrong. None of these was a bug in the thing being tested. Every one was a bug in the instrument — and every one looked authoritative until something unrelated contradicted it.</p>
+<p>A quieter second class sits beside it: <strong>a check fires on a wrong value, and nothing fires on a missing one.</strong> Every assertion you write is about something that exists, which is why absence is the failure a test suite is structurally blind to.</p>
+
+<h2>Why AI agents make it sharper</h2>
+<p>An agent writes the code <em>and</em> the check that validates it. Both come from the same understanding of the problem, so if that understanding has a hole, the hole is in both. Agreement between an agent's work and an agent's verification of it is not independent evidence — it is the same reasoning, twice.</p>
+<p>That is not an argument against agents. It is an argument for one question, asked by a human, about every green result:</p>
+<blockquote><p>What would make this report success while being wrong?</p></blockquote>
+
+<h2>All fifteen rules</h2>
+<h3>Systems <small>how programs, controls and checks fail</small></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Note</th><th>The rule</th></tr></thead>
+<tbody>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/liveness-is-not-identity.md" rel="noopener">Liveness Is Not Identity</a></td><td>A port answering proves something is there. It does not prove it&#x27;s the thing you deployed.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/a-flag-is-not-a-control.md" rel="noopener">A Flag Is Not a Control</a></td><td>A flag that says an exposure exists is not a control. The thing that bounds it is — and it must be inside the hash.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/make-the-instrument-disagree.md" rel="noopener">Make the Instrument Disagree With Itself</a></td><td>Before you trust a probe, feed it something it must reject. If it answers the same to both, it has told you nothing.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/absence-needs-its-own-clock.md" rel="noopener">Absence Needs Its Own Clock</a></td><td>A detector for “nothing happened” cannot be driven by the thing that stopped happening.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/the-file-nobody-owns.md" rel="noopener">The File Nobody Owns Is the One Everybody Reads</a></td><td>The more often a file is read automatically, the less often it is read deliberately. Audit those first.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/an-absence-has-no-symptom.md" rel="noopener">An Absence Has No Symptom</a></td><td>A check fires on a wrong value. Nothing fires on a missing one.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/behind-its-own-exit.md" rel="noopener">The Guard Sits Behind Its Own Exit</a></td><td>Code written for a condition must be reachable in that condition. Presence is not execution.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/the-mutation-that-didnt-happen.md" rel="noopener">The Mutation That Didn&#x27;t Happen</a></td><td>Assert the change took effect before you interpret the outcome. A change that matched nothing succeeds silently.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/the-gate-that-checks-the-defect.md" rel="noopener">The Gate That Verifies Against the Defect</a></td><td>When a ruling forbids a source, every check that consumed it is now suspect — including the ones enforcing the ruling.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/the-artifact-that-rotted-in-place.md" rel="noopener">The Artifact That Rotted in Place</a></td><td>An open change decays against a moving base. Staleness is measured in merges, not days.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/the-tip-that-advertised-its-scaffold.md" rel="noopener">The Tip That Advertised Its Scaffold</a></td><td>Never leave a live pull-request tip on placeholder content. Push atomic restores only.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/the-failure-that-heals-its-symptom.md" rel="noopener">The Failure That Heals Its Own Symptom</a></td><td>A recovery path must not clear an alarm it cannot verify. A half-done state needs a name of its own.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/the-stand-in-that-looked-like-production.md" rel="noopener">Name What Your Test Stood In For</a></td><td>A substitute is most convincing as it approaches the real thing — and the closer it gets, the less anyone re-checks it.</td></tr>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/the-alarm-that-worked-until-it-was-needed.md" rel="noopener">The Alarm Path Is the Least-Tested Code You Have</a></td><td>Code that runs only when something is already wrong is the least-exercised and most consequential code you own.</td></tr>
+</tbody></table></div>
+<h3>Orchestration <small>how instructing an agent fails</small></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Note</th><th>The rule</th></tr></thead>
+<tbody>
+<tr><td><a href="https://github.com/ClearForge-LLC/ClearProof/blob/main/notes/a-goal-it-was-forbidden-to-reach.md" rel="noopener">A Goal Must End Where the Agent&#x27;s Authority Ends</a></td><td>A goal only reachable through an action the agent is forbidden to take can never be met — and a completion loop will pursue it indefinitely.</td></tr>
+</tbody></table></div>
+<p class="note">The list grows as the work does. A note is added when a new failure teaches something the existing rules don't already cover.</p>
+
+<h2>The repo holds itself to its own rules</h2>
+<p>A sanitisation gate runs on every change. It scans the current files <em>and every line ever added in the history</em> — because a secret committed once and removed in the next commit is public forever.</p>
+<p>Before its result is believed, the gate runs a self-test: it fires every rule against a deliberately bad sample and confirms each one goes red. A gate nobody has watched fail is indistinguishable from a gate that cannot.</p>
+
+<div class="next">
+<p><strong>Read the notes:</strong> <a href="https://github.com/ClearForge-LLC/ClearProof" rel="noopener">ClearProof on GitHub</a></p>
+<p><strong>The method they came from:</strong> <a href="/method/">The Co&#8209;Architect Method</a> · <strong>The standard they shaped:</strong> <a href="/clearseal/">ClearSeal</a></p>
+</div>
+</article>
+<footer>
+<p>This page was drafted by Claude (Anthropic) at Scotty's direction from the ClearProof repository, and published with his approval. The notes themselves are the source of record.</p>
+<p>© 2026 ClearForge LLC.</p>
+</footer>
+</body>
+</html>
